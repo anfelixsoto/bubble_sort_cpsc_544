@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void GenerateRandomNumbers(List <Integer> nums)
     {
         Random rnd = new Random();
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 8; i++)
             nums.add(rnd.nextInt(1000));
         //Collections.shuffle(nums);
     }
