@@ -2,6 +2,8 @@ package edu.fullerton.csu.cpsc544.bubble_sort;
 
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -37,9 +38,19 @@ public class MainActivity extends AppCompatActivity {
             content.append(i.toString()).append(" ");
         TextView view = findViewById(R.id.num_view);
         view.setText(content);
+
+
     }
 
+    // User input
+    public void handleUserInput(View v){
+        TextView userInputField = findViewById(R.id.userInput);
+        String userInput = userInputField.getText().toString();
 
+        // for testing: checking if button causes input to be recorded
+        TextView temp = findViewById(R.id.num_view);
+        temp.setText(userInput);
+    }
 
     private void GenerateRandomNumbers(List <Integer> nums)
     {
