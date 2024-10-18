@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Bubble Sort</string>
+    <string name="range_input_text">Input Range: </string>
+    <string name="array_text">Enter Numbers: </string>
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
 </resources>
