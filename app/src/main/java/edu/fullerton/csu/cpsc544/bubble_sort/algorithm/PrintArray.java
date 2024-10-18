@@ -1,4 +1,4 @@
-
+package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 //Contains function for printing array, array has to be passed in
 
 public class PrintArray {

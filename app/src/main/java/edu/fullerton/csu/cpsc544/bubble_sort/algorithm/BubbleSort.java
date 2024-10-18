@@ -1,4 +1,4 @@
-
+package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 // Bubble Sort class contains 2 methods: Bubble Sort Ascending and Bubble Sort Descending
 
 public class BubbleSort 
