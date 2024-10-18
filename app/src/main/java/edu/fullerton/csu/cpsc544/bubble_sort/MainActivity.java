@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import edu.fullerton.csu.cpsc544.bubble_sort.algorithm.BubbleSort;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         generate_numbers.setOnClickListener(v -> {
             GenerateRandomNumbers(nums);
         });
+
+        BubbleSort bubbleSort = new BubbleSort();
     }
 
     // User input

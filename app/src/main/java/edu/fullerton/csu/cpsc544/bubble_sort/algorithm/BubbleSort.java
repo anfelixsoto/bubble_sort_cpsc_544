@@ -3,7 +3,8 @@ package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 
 public class BubbleSort 
 {
-    
+    public BubbleSort() {}
+
     public static void ascending(int arr[])
     {
         for(int i = 0; i < arr.length-1; ++i)
