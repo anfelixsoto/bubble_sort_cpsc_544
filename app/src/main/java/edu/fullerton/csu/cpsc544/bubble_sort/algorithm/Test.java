@@ -1,4 +1,4 @@
-
+package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 //EO: Init test with static array to show BubbleSort algo functionality. 
 //Does not yet contain scanner or Arraylist functionality.
 
