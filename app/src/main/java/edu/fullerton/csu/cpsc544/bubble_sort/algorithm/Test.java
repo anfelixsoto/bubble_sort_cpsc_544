@@ -11,12 +11,12 @@ public class Test {
     {
         int arr[] = { 64, 34, 25, 12, 22, 11, 90 };
         int n = arr.length;
-        BubbleSort.asc_bubbleSort(arr);
+        BubbleSort.ascending(arr);
         System.out.println("Ascending: ");
         
         PrintArray.printArray(arr, n);
 
-        BubbleSort.desc_bubbleSort(arr);
+        BubbleSort.descending(arr);
 
         System.out.println("Descending: ");
         PrintArray.printArray(arr, n);

@@ -4,7 +4,7 @@
 public class BubbleSort 
 {
     
-    public static void asc_bubbleSort(int arr[])
+    public static void ascending(int arr[])
     {
         for(int i = 0; i < arr.length-1; ++i)
         {
@@ -27,7 +27,7 @@ public class BubbleSort
         }
     }
 
-    public static void desc_bubbleSort(int arr[])
+    public static void descending(int arr[])
     {
         
         for(int i = 0; i < arr.length-1; ++i)
