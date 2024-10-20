@@ -1,12 +1,14 @@
-
-// Bubble Sort class contains 2 methods: Bubble Sort Ascending and Bubble Sort Descending
 package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
+// Bubble Sort class contains 2 methods: Bubble Sort Ascending and Bubble Sort Descending
+
 import java.util.List;
 
 public class BubbleSort 
 {
+
     
     public static void ascending(List<Integer>arr)
+
     {
         for(int i = 0; i < arr.size()-1; ++i)
         {
