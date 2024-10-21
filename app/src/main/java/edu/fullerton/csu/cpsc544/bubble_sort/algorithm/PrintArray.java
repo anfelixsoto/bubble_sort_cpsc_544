@@ -1,7 +1,6 @@
 package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 //Contains function for printing array, array has to be passed in
-package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
-import java.util.list;
+import java.util.List;
 public class PrintArray {
 
     public static void printArray(List<Integer>arr)
