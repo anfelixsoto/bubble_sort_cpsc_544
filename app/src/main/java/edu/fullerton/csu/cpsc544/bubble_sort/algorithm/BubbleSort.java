@@ -1,24 +1,27 @@
 package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 // Bubble Sort class contains 2 methods: Bubble Sort Ascending and Bubble Sort Descending
 
+import java.util.List;
+
 public class BubbleSort 
 {
-    public BubbleSort() {}
 
-    public static void ascending(int arr[])
+    
+    public static void ascending(List<Integer>arr)
+
     {
-        for(int i = 0; i < arr.length-1; ++i)
+        for(int i = 0; i < arr.size()-1; ++i)
         {
             boolean swapped = false;
 
-            for(int j = 0; j < arr.length - i - 1; ++j)
+            for(int j = 0; j < arr.size() - i - 1; ++j)
             {
-                if(arr[j] > arr[j + 1]) //ascending order
+                if(arr.get(i) > arr.get(j + 1)) //ascending order
                 {
-                    //swap arr[j] and arr[j + 1]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    //swap 
+                    int temp = arr.get(j);
+                    arr.set(j, arr.get(j + 1));
+                    arr.set(j + 1, temp);
                     swapped = true;
                 }
             }
@@ -28,21 +31,21 @@ public class BubbleSort
         }
     }
 
-    public static void descending(int arr[])
+    public static void descending(List<Integer>arr)
     {
         
-        for(int i = 0; i < arr.length-1; ++i)
+        for(int i = 0; i < arr.size()-1; ++i)
         {
             boolean swapped = false;
 
-            for(int j = 0; j < arr.length - i - 1; ++j)
+            for(int j = 0; j < arr.size() - i - 1; ++j)
             {
-                if(arr[j] < arr[j + 1]) //descending order
+                if(arr.get(i) < arr.get(j + 1)) //descending
                 {
-                    //swap arr[j] and arr[j + 1]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    //swap 
+                    int temp = arr.get(j);
+                    arr.set(j, arr.get(j + 1));
+                    arr.set(j + 1, temp);
                     swapped = true;
                 }
             }
