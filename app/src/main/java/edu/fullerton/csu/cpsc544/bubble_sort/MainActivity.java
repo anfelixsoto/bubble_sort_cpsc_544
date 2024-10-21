@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -53,12 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         String userInput = "user input: " + userInputField.getText().toString();
 
-        TextView view = new TextView(this);
+        TextView view = findViewById(R.id.output_view);
         view.setText(userInput);
 
-        ScrollView scroll = findViewById(R.id.scroll_view);
-        scroll.addView(view);
-
+        LinearLayout linearLayout = findViewById(R.id.linear_layout);
     }
 
     private void GenerateRandomNumbers(List <Integer> nums)
