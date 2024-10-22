@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Bubble Sort</string>
-    <string name="range_input_text">Input Range: </string>
-    <string name="array_text">Enter Numbers: </string>
+    <string name="range_input_text">Input Range</string>
+    <string name="range_input_helper">Enter a number between 3 and 8</string>
+    <string name="number_input_text">Enter Numbers</string>
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
+    <string name="generate_random_num_text">Generate Random Numbers</string>
+    <string name="submit">Submit</string>
 </resources>
