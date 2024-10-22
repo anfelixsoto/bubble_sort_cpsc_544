@@ -1,11 +1,11 @@
 package edu.fullerton.csu.cpsc544.bubble_sort;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,9 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import edu.fullerton.csu.cpsc544.bubble_sort.algorithm.BubbleSort;
 
@@ -34,43 +37,63 @@ public class MainActivity extends AppCompatActivity {
         });
 
         List <Integer> nums = new ArrayList<>();
-        SpannableStringBuilder content = new SpannableStringBuilder();
 
         Button generate_numbers = findViewById(R.id.generate_random_button);
         generate_numbers.setOnClickListener(v -> {
             GenerateRandomNumbers(nums);
         });
 
+        Button submit = findViewById(R.id.submit);
+        submit.setOnClickListener(v -> {
+            handleUserInput(nums);
+        });
+
         BubbleSort bubbleSort = new BubbleSort();
     }
 
     // User input
-    public void handleUserInput(View v)
+    public void handleUserInput(List <Integer> nums)
     {
-        TextView userInputField = findViewById(R.id.num_array);
-
-        /* Converts rangeInput to an integer */
-        //Integer range = Integer.parseInt(rangeInput.getText().toString());
-
-        String userInput = "user input: " + userInputField.getText().toString();
-
+        nums = ConvertUserInputStringToList();
         TextView view = findViewById(R.id.output_view);
-        view.setText(userInput);
+        SpannableStringBuilder content = new SpannableStringBuilder();
+        for(int i = 0; i < nums.size(); i++)
+            content.append(nums.get(i).toString()).append(" ");
 
-        LinearLayout linearLayout = findViewById(R.id.linear_layout);
+        view.setText(content);
     }
 
     private void GenerateRandomNumbers(List <Integer> nums)
     {
         TextView rangeInput = findViewById(R.id.range_input);
-        int range = Integer.parseInt(rangeInput.getText().toString());
+        String result = rangeInput.getText().toString();
+        int rng = result.matches("") ? 3
+                : Integer.parseInt(rangeInput.getText().toString());
+
+        rangeInput.setText(Integer.toString(rng));
+
+        Random rnd = new Random();
 
         nums.clear();
-        Random rnd = new Random();
-        for(int i = 0; i < range; i++)
+        for(int i = 0; i < rng; i++)
             nums.add(rnd.nextInt(1000));
 
         SetUserInputText(nums);
+    }
+
+    private List<Integer> ConvertUserInputStringToList()
+    {
+        TextView list = findViewById(R.id.num_array);
+        String str = list.getText().toString();
+        List <Integer> result = new ArrayList<>();
+
+        str = str.replaceAll("[-+.^:,]"," ");
+
+       Scanner scanner = new Scanner(str);
+       while(scanner.hasNextInt())
+           result.add(scanner.nextInt());
+
+        return result;
     }
 
     private void SetUserInputText(List <Integer> nums)
@@ -83,5 +106,14 @@ public class MainActivity extends AppCompatActivity {
             content.append(nums.get(i).toString()).append(i < nums.size() - 1 ? ", " : " ");
 
         userInputField.setText(content);
+    }
+
+    public void SetToggleText(View v)
+    {
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch tgl
+                = findViewById(R.id.ascending_or_descending);
+        tgl.setText(getResources().getString(
+                tgl.isChecked() ? R.string.ascending :
+                        R.string.descending));
     }
 }

@@ -5,6 +5,7 @@
     android:id="@+id/order_type"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="SetToggleText"
     tools:context=".MainActivity">
 
     <TextView
@@ -24,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:onClick="handleUserInput"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,23 +44,23 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="223dp"
         android:layout_height="83dp"
-        app:helperText="Enter a number between 3 and 8"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:helperText="@string/range_input_helper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061"
-        app:errorEnabled="true"
-        app:endIconMode="clear_text">
+        app:layout_constraintVertical_bias="0.061">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/range_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Enter Range"
             android:hint="@string/range_input_text"
             android:numeric="integer" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,8 +74,7 @@
         app:layout_constraintHorizontal_bias="0.323"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177"
-        app:endIconMode="clear_text">
+        app:layout_constraintVertical_bias="0.177">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/num_array"
@@ -87,6 +86,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="395dp"
         android:layout_height="568dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,5 +108,19 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
+    <Switch
+        android:id="@+id/ascending_or_descending"
+        android:layout_width="136dp"
+        android:layout_height="51dp"
+        android:checked="true"
+        android:onClick="SetToggleText"
+        android:text="@string/ascending"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
