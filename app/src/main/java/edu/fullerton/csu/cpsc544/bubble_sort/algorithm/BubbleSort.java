@@ -1,12 +1,32 @@
 package edu.fullerton.csu.cpsc544.bubble_sort.algorithm;
 // Bubble Sort class contains 2 methods: Bubble Sort Ascending and Bubble Sort Descending
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BubbleSort 
 {
+    public static List<List<Integer>> Sort(List<Integer> inputArray, boolean ascending){
+        List<List<Integer>> steps = new ArrayList<>();
+        for(int i = 0; i< inputArray.size(); i++){
+            boolean isSwapped = false;
 
-    
+            for(int j = 1; j< inputArray.size(); j++){
+                int current = inputArray.get(j);
+                int previous = inputArray.get(j-1);
+
+                if(ascending ? previous > current : previous < current){
+                    inputArray.set(j, previous);
+                    inputArray.set(j-1, current);
+                    isSwapped = true;
+                }
+            }
+            if(!isSwapped) break;
+            steps.add(new ArrayList<>(inputArray));
+        }
+        return steps;
+    }
+
     public static void ascending(List<Integer>arr)
 
     {

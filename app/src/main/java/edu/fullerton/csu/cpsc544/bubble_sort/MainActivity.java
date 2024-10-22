@@ -14,8 +14,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,17 +46,28 @@ public class MainActivity extends AppCompatActivity {
             handleUserInput(nums);
         });
 
-        BubbleSort bubbleSort = new BubbleSort();
+        //BubbleSort bubbleSort = new BubbleSort();
     }
 
     // User input
     public void handleUserInput(List <Integer> nums)
     {
         nums = ConvertUserInputStringToList();
+        BubbleSort bubbleSort = new BubbleSort();
+        List<List<Integer>> steps = BubbleSort.Sort(nums, IsToggleChecked());
+        MakePrintableContentFromStep(steps);
+    }
+
+    private void MakePrintableContentFromStep(List<List<Integer>> steps) {
         TextView view = findViewById(R.id.output_view);
         SpannableStringBuilder content = new SpannableStringBuilder();
-        for(int i = 0; i < nums.size(); i++)
-            content.append(nums.get(i).toString()).append(" ");
+        for(int k =0; k< steps.size(); k++){
+            for(int i = 0; i < steps.get(k).size(); i++){
+                List<Integer> nums = steps.get(k);
+                content.append(nums.get(i).toString()).append(" ");
+            }
+            content.append("\n");
+        }
 
         view.setText(content);
     }
@@ -116,4 +125,12 @@ public class MainActivity extends AppCompatActivity {
                 tgl.isChecked() ? R.string.ascending :
                         R.string.descending));
     }
+
+    public boolean IsToggleChecked()
+    {
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch tgl
+                = findViewById(R.id.ascending_or_descending);
+        return tgl.isChecked();
+    }
+
 }
