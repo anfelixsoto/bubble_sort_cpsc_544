@@ -14,11 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 import edu.fullerton.csu.cpsc544.bubble_sort.algorithm.BubbleSort;
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button generate_numbers = findViewById(R.id.generate_random_button);
         generate_numbers.setOnClickListener(v -> {
-            GenerateRandomNumbers(nums);
+            GenerateRandomNumbersButton(nums);
         });
 
         Button submit = findViewById(R.id.submit);
@@ -48,37 +45,51 @@ public class MainActivity extends AppCompatActivity {
             handleUserInput(nums);
         });
 
-        BubbleSort bubbleSort = new BubbleSort();
     }
 
     // User input
     public void handleUserInput(List <Integer> nums)
     {
         nums = ConvertUserInputStringToList();
+        UserInputErrorCheck(nums, GetRange());
+
         TextView view = findViewById(R.id.output_view);
         SpannableStringBuilder content = new SpannableStringBuilder();
-        for(int i = 0; i < nums.size(); i++)
-            content.append(nums.get(i).toString()).append(" ");
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch tgl
+                = findViewById(R.id.ascending_or_descending);
+
+        BubbleSort bubblesort = new BubbleSort();
+
+        if(tgl.isChecked()) BubbleSort.ascending(nums);
+        else BubbleSort.descending(nums);
+
+        content.append(bubblesort.toString());
 
         view.setText(content);
     }
 
-    private void GenerateRandomNumbers(List <Integer> nums)
+    @SuppressLint("SetTextI18n")
+    private void GenerateRandomNumbersButton(List <Integer> nums)
     {
         TextView rangeInput = findViewById(R.id.range_input);
-        String result = rangeInput.getText().toString();
-        int rng = result.matches("") ? 3
-                : Integer.parseInt(rangeInput.getText().toString());
+        int rng = GetRange();
+
+        if(rng < 3 || rng > 8)
+            rng = GenerateNumbers(3, 8);
 
         rangeInput.setText(Integer.toString(rng));
 
-        Random rnd = new Random();
-
         nums.clear();
         for(int i = 0; i < rng; i++)
-            nums.add(rnd.nextInt(1000));
+            nums.add(GenerateNumbers(-10000, 10000));
 
         SetUserInputText(nums);
+    }
+
+    private Integer GenerateNumbers(int min, int max)
+    {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
     private List<Integer> ConvertUserInputStringToList()
@@ -87,13 +98,38 @@ public class MainActivity extends AppCompatActivity {
         String str = list.getText().toString();
         List <Integer> result = new ArrayList<>();
 
-        str = str.replaceAll("[-+.^:,]"," ");
+        str = str.replaceAll("[+.^:,]"," ");
 
        Scanner scanner = new Scanner(str);
        while(scanner.hasNextInt())
            result.add(scanner.nextInt());
 
+       if(result.isEmpty())
+           GenerateRandomNumbersButton(result);
+
+        TextView rangeInput = findViewById(R.id.range_input);
+        UserInputErrorCheck(result, Integer.parseInt(rangeInput.getText().toString()));
+
+        SetUserInputText(result);
+
         return result;
+    }
+
+    private void UserInputErrorCheck(List <Integer> result, int rng)
+    {
+        if(result.size() < rng)
+            for(int i = result.size(); i < rng; i++)
+                result.add(GenerateNumbers(-10000, 10000));
+
+        while(result.size() > rng)
+            for(int i = rng; i < result.size(); i++)
+                result.remove(result.size() - 1);
+
+        while(result.size() < 3)
+            result.add(GenerateNumbers(-10000, 10000));
+
+        while(result.size() > 8)
+            result.remove(result.size() - 1);
     }
 
     private void SetUserInputText(List <Integer> nums)
@@ -115,5 +151,15 @@ public class MainActivity extends AppCompatActivity {
         tgl.setText(getResources().getString(
                 tgl.isChecked() ? R.string.ascending :
                         R.string.descending));
+    }
+
+    public Integer GetRange()
+    {
+        TextView rangeInput = findViewById(R.id.range_input);
+        String result = rangeInput.getText().toString();
+        int rng = result.matches("") ? GenerateNumbers(3, 8)
+                : Integer.parseInt(rangeInput.getText().toString());
+
+        return rng;
     }
 }
