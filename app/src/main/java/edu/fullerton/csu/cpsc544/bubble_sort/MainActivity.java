@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,13 +73,16 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void GenerateRandomNumbersButton(List <Integer> nums)
     {
-        TextView rangeInput = findViewById(R.id.range_input);
+        // TextView rangeInput = findViewById(R.id.range_input);
         int rng = GetRange();
 
+        // Check handled in GetRange()
+        /*
         if(rng < 3 || rng > 8)
             rng = GenerateNumbers(3, 8);
 
         rangeInput.setText(Integer.toString(rng));
+        */
 
         nums.clear();
         for(int i = 0; i < rng; i++)
@@ -153,12 +157,21 @@ public class MainActivity extends AppCompatActivity {
                         R.string.descending));
     }
 
+    @SuppressLint("SetTextI18n")
     public Integer GetRange()
     {
         TextView rangeInput = findViewById(R.id.range_input);
         String result = rangeInput.getText().toString();
         int rng = result.matches("") ? GenerateNumbers(3, 8)
                 : Integer.parseInt(rangeInput.getText().toString());
+
+        // Error popup for input != [3, 8]
+        if (rng < 3 || rng > 8) {
+            Toast.makeText(this, "Warning: Input must be a number between 3 and 8.", Toast.LENGTH_LONG).show();
+            if (rng < 3) rng = 3;
+            else rng = 8;
+            rangeInput.setText(Integer.toString(rng));
+        }
 
         return rng;
     }
