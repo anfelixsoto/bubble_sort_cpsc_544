@@ -10,12 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -73,17 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void GenerateRandomNumbersButton(List <Integer> nums)
     {
-        // TextView rangeInput = findViewById(R.id.range_input);
         int rng = GetRange();
-
-        // Check handled in GetRange()
-        /*
-        if(rng < 3 || rng > 8)
-            rng = GenerateNumbers(3, 8);
-
-        rangeInput.setText(Integer.toString(rng));
-        */
-
         nums.clear();
         for(int i = 0; i < rng; i++)
             nums.add(GenerateNumbers(-10000, 10000));
@@ -155,6 +147,23 @@ public class MainActivity extends AppCompatActivity {
         tgl.setText(getResources().getString(
                 tgl.isChecked() ? R.string.ascending :
                         R.string.descending));
+    }
+
+    public void ResetText(View v)
+    {
+        TextView rangeInput = findViewById(R.id.range_input);
+        rangeInput.setText("");
+
+        TextView userInputField = findViewById(R.id.num_array);
+        userInputField.setText("");
+
+        TextView view = findViewById(R.id.output_view);
+        view.setText("");
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch tgl
+                = findViewById(R.id.ascending_or_descending);
+        tgl.setChecked(true);
+        SetToggleText(tgl);
     }
 
     @SuppressLint("SetTextI18n")
