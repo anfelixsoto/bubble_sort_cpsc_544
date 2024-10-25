@@ -169,27 +169,21 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public Integer GetRange()
     {
-        int range = 3;
         TextView rangeInput = findViewById(R.id.range_input);
         String inputString = rangeInput.getText().toString();
 
-        if (inputString.matches("")) {
-            range = GenerateNumbers(3, 8);
-            rangeInput.setText(Integer.toString(range));
+        int range = inputString.matches("") ? 0 : Integer.parseInt(inputString);
 
-        }
-        else {
-            range = Integer.parseInt(inputString);
+        if (range < 3 || range > 8)
+        {
+            Toast.makeText(
+                    this,
+                    "Warning: Input must be a number between 3 and 8.",
+                    Toast.LENGTH_LONG
+            ).show();
 
-            if (range < 3 || range > 8) {
-                Toast.makeText(
-                        this,
-                        "Warning: Input must be a number between 3 and 8.",
-                        Toast.LENGTH_LONG
-                ).show();
-                if (range < 3) range = 3;
-                else range = 8;
-            }
+            range = range == 0 ? GenerateNumbers(3, 8) :
+                    range < 3 ? 3 : 8;
         }
 
         rangeInput.setText(Integer.toString(range));
