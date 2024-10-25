@@ -84,4 +84,16 @@ public class BubbleSort
 
         return sb.toString();
     }
+
+    public static List<Integer> GetFinalResult()
+    {
+        Swap sp = new Swap();
+        sp = results.get(results.size() - 1);
+        return sp.GetResult();
+    }
+
+    public static Integer GetResultSize()
+    {
+        return results.size();
+    }
 }
